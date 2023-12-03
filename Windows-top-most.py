@@ -6,14 +6,15 @@ class UstteDurPencere(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Üstte Duran Pencereleri Yönet")
-        self.geometry("400x400")
+        self.title("Üstte Duran Pencere")
+        self.geometry("400x370")
+        self.resizable(False, False)
 
         self.pencere_listesi = self.get_open_windows()
         self.secili_pencere = None
 
-        # Açık pencerelerin listesini gösteren liste kutucuğu
-        self.pencere_listbox = tk.Listbox(self, selectmode=tk.SINGLE, exportselection=0)
+        # Açık pencerelerin listesini gösteren liste kutucuğu (width parametresi ile genişletildi)
+        self.pencere_listbox = tk.Listbox(self, selectmode=tk.SINGLE, exportselection=0, width=50)
         self.refresh_window_list()
         self.pencere_listbox.pack(pady=10)
         self.pencere_listbox.bind("<<ListboxSelect>>", self.secili_pencereyi_degistir)
@@ -29,6 +30,10 @@ class UstteDurPencere(tk.Tk):
         # "Pasif" düğmesi
         pasif_button = tk.Button(self, text="Pasif", command=self.pasif_yap)
         pasif_button.pack(pady=10)
+
+        # Programı kimin hazırladığını belirten etiket
+        bilgi_etiketi = tk.Label(self, text="Hazırlayan: [TheEagleClaw]")
+        bilgi_etiketi.pack(side="bottom", pady=5)
 
         # Pencerenin kapatılmasını dinle
         self.protocol("WM_DELETE_WINDOW", self.pencere_kapat)
